@@ -1,0 +1,12 @@
+@import '../../scss/variables';
+
+.gameBoard {
+    min-width: 320px;
+    width: 400px;
+    background: #fff;
+    min-height: calc(#{$heatherHeight} + #{$gameFieldHeight});
+    height: calc(#{$heatherHeight} + #{$gameFieldMaxHeight});
+    z-index: 1;
+    border-radius: 8px;
+    overflow: hidden;
+}

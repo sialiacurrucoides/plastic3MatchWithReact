@@ -1,0 +1,14 @@
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100%;
+  height: 100vh;
+  background-color: #2A85AA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

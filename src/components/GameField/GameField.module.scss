@@ -1,0 +1,10 @@
+@import '../../scss/variables';
+
+.gameField {
+    background-image: url('../../assets/imgs/bin-bg-light.bmp');
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: $gameFieldHeight;
+    height: $gameFieldMaxHeight;
+    margin: 1rem 0;
+}
