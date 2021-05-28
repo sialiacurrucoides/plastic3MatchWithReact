@@ -1,0 +1,13 @@
+.tile {
+    position: absolute;
+    width: 7%;
+    height: 7%;
+    background-image: url('../../../assets/imgs/icon_1.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 25%;
+    margin: 0;
+    box-shadow: #444 3px 2px 2px;
+    opacity: 0.85;
+    padding: 2px;
+}
