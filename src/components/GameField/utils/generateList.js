@@ -1,6 +1,5 @@
 import { shuffle } from './shuffle';
 import { calcNrOfEachPlasticTypes } from './calcNrOfEachPlasticTypes';
-import { tileStates } from '../constants/constants';
 
 const plasticNrPerType = calcNrOfEachPlasticTypes();
 
@@ -13,5 +12,5 @@ export const generateList = (howMany = plasticNrPerType) => {
     }
     fieldElems = shuffle(fieldElems);
  
-    return fieldElems.map(el => ({value: el, state: tileStates[0]}));
+    return fieldElems.map((el, index) => ({position:index, value: el, pointValue: 0}));
 };

@@ -1,5 +1,6 @@
-export const nrElements = 100;
-export const nrOfColumns = nrElements/10;
+export const nrOfColumns = 10;
+export const nrOfRows = 10;
+export const nrElements = nrOfColumns*nrOfRows;
 export const tips = [
     "7 stands for 'other types' of plastic",
     "Metalized films usually cannot be recycled even if the plastic type is PP.",
