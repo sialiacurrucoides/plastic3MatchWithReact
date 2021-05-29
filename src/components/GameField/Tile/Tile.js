@@ -8,6 +8,8 @@ import calcNewPosition from './utils/calcNewPosition';
 const Tile = ({tileValue, position, tileState, onSwitch}) => {
     const [tileStyle, setTileStyle] = useState(tileState === tileStates[2] ? `${styles.tile} ${styles.shrinked}`: styles.tile);
     const [highlighted, setHighlighted] = useState(false);
+    const [transformAmount, setTransformAmount] =useState(`translate(0px,0px)`);
+    const [currentCoordinates, setCurrentCoordinates] = useState([null, null]);
 
     const fromTop = calcTileFromTop(position);
     const fromLeft = calcTileFromLeft(position);
@@ -19,15 +21,17 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
         setHighlighted(prev => !prev);
     };
 
-    let currentCoordinates = [null, null];
 
     const handleDragStart = (event) => {
-        currentCoordinates = [event.pageX, event.pageY];
+        setCurrentCoordinates([event.pageX, event.pageY]);
     };
 
-    // const handleDrag = (event) => {
-    //     console.log("drag is happening");
-    // };
+    const handleDrag = (event) => {
+        const diffX = event.pageX - currentCoordinates[0];
+        const diffY = event.pageY - currentCoordinates[1];
+
+        setTransformAmount(`translate(${diffX}px, ${diffY}px)`);
+    };
 
     const handleDragStop = (event) => {
         const diffX = currentCoordinates[0] - event.pageX;
@@ -37,7 +41,7 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
         if (newPosition !== position){
             onSwitch(position, newPosition);
         }
-        
+        setTransformAmount(`translate(0px,0px)`);
     };
 
     useEffect(() => {
@@ -52,12 +56,12 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
     return (<DraggableCore
             nodeRef={nodeRef}
             onStart={handleDragStart}
-            // onDrag={handleDrag}
+            onDrag={handleDrag}
             onStop={handleDragStop}
             >
             <div className={tileStyle}
                 ref={nodeRef}
-                style={{top: fromTop, left: fromLeft, backgroundImage: `url("imgs/icon_${tileValue + 1}.png")`}}
+                style={{top: fromTop, left: fromLeft, transform: transformAmount, backgroundImage: `url("imgs/icon_${tileValue + 1}.png")`}}
                 onClick={handleTileClick}>
             </div>
             </DraggableCore>
