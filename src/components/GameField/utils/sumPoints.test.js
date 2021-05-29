@@ -56,34 +56,36 @@ describe("detectPattern", () => {
         expect(actual).toBe(expected);
     });
 
-    it("should give 3 points for positions 0,10,20", () => {
-        const first3match = emptyArray.map((_, index) => [0,10,20].includes(index) ? 
-        {position: index, value: recyclablePlastic[0], pointValue: 0} : 
-        {position: index, value: nonrecyclablePlastic[0], pointValue: 0});
-        
-        const actual = sumPoints(detectPatterns(first3match));
-        const expected = 3;
-        expect(actual).toBe(expected);
-    });
-
-    it("should give 6 points for positions 0,10,20,30", () => {
-        const first3match = emptyArray.map((_, index) => [0,10,20,30].includes(index) ? 
-        {position: index, value: recyclablePlastic[0], pointValue: 0} : 
-        {position: index, value: nonrecyclablePlastic[0], pointValue: 0});
-        
-        const actual = sumPoints(detectPatterns(first3match));
-        const expected = 6;
-        expect(actual).toBe(expected);
-    });
-
-    it("should give 9 points for positions 0,10,20,30,40", () => {
-        const first3match = emptyArray.map((_, index) => [0,10,20,30,40].includes(index) ? 
-        {position: index, value: recyclablePlastic[0], pointValue: 0} : 
-        {position: index, value: nonrecyclablePlastic[0], pointValue: 0});
-        
-        const actual = sumPoints(detectPatterns(first3match));
-        const expected = 9;
-        expect(actual).toBe(expected);
+    describe("should detect vertical patterns", () => {
+        it("should give 3 points for positions 0,10,20", () => {
+            const first3match = emptyArray.map((_, index) => [0,10,20].includes(index) ? 
+            {position: index, value: recyclablePlastic[0], pointValue: 0} : 
+            {position: index, value: nonrecyclablePlastic[0], pointValue: 0});
+            
+            const actual = sumPoints(detectPatterns(first3match));
+            const expected = 3;
+            expect(actual).toBe(expected);
+        });
+    
+        it("should give 6 points for positions 0,10,20,30", () => {
+            const first3match = emptyArray.map((_, index) => [0,10,20,30].includes(index) ? 
+            {position: index, value: recyclablePlastic[0], pointValue: 0} : 
+            {position: index, value: nonrecyclablePlastic[0], pointValue: 0});
+            
+            const actual = sumPoints(detectPatterns(first3match));
+            const expected = 6;
+            expect(actual).toBe(expected);
+        });
+    
+        it("should give 9 points for positions 0,10,20,30,40", () => {
+            const first3match = emptyArray.map((_, index) => [0,10,20,30,40].includes(index) ? 
+            {position: index, value: recyclablePlastic[0], pointValue: 0} : 
+            {position: index, value: nonrecyclablePlastic[0], pointValue: 0});
+            
+            const actual = sumPoints(detectPatterns(first3match));
+            const expected = 9;
+            expect(actual).toBe(expected);
+        });
     });
 
     describe("should detect L shape formations", () => {

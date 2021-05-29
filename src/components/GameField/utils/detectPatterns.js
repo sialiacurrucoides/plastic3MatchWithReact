@@ -16,21 +16,6 @@ const calculatePointValue = (list, index) => {
     const has2AboveMatch = (index - 2*nrOfColumns >= 0) && hasAboveMatch && list[index].value === list[index - 2*nrOfColumns].value;
     const has2BelowMatch = (index + 2*nrOfColumns < nrElements) && hasBelowMatch && list[index].value === list[index + 2*nrOfColumns].value;
 
-    if ((!hasLeftMatch && has2RightMatch && !has2AboveMatch && !has2BelowMatch) || 
-    (!hasRightMatch && has2LeftMatch && !has2AboveMatch && !has2BelowMatch) || 
-    (!hasAboveMatch && has2BelowMatch && !has2RightMatch && !has2LeftMatch) || 
-    (!hasBelowMatch && has2AboveMatch && !has2RightMatch && !has2LeftMatch) ||
-    (hasRightMatch && hasLeftMatch && !has2LeftMatch && !has2RightMatch) || 
-    (hasAboveMatch && hasBelowMatch && !has2AboveMatch && !has2BelowMatch)) {
-        return 1;
-    }
-
-    if ((hasLeftMatch && has2RightMatch && !has2LeftMatch) || 
-    (hasRightMatch && has2LeftMatch && !has2RightMatch) ||
-    (hasAboveMatch && has2BelowMatch && !has2AboveMatch) || 
-    (hasBelowMatch && has2AboveMatch && !has2BelowMatch)) {
-        return 2;
-    }
 
     if ((has2AboveMatch && has2BelowMatch) || 
     (has2LeftMatch && has2RightMatch) || 
@@ -40,6 +25,26 @@ const calculatePointValue = (list, index) => {
     (has2BelowMatch && has2LeftMatch)) {
         return 3;
     }
+
+    if ((hasLeftMatch && has2RightMatch) || 
+    (hasRightMatch && has2LeftMatch) ||
+    (hasAboveMatch && has2BelowMatch) || 
+    (hasBelowMatch && has2AboveMatch)) {
+        return 2;
+    }
+
+    if ((!hasLeftMatch && has2RightMatch) || 
+    (!hasRightMatch && has2LeftMatch) || 
+    (!hasAboveMatch && has2BelowMatch) || 
+    (!hasBelowMatch && has2AboveMatch) ||
+    (hasRightMatch && hasLeftMatch) || 
+    (hasAboveMatch && hasBelowMatch)) {
+        return 1;
+    }
+
+
+
+
 
     return 0;
 
