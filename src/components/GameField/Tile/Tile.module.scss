@@ -10,4 +10,15 @@
     box-shadow: #444 3px 2px 2px;
     opacity: 0.85;
     padding: 2px;
+    transition: scale 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.highlighted {
+    box-shadow: #6b746e 6px 3px 3px !important;
+	transform: scale(1.1);
+}
+
+.shrinked {
+    transform: scale(0.5);
 }

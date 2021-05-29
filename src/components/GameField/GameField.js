@@ -13,15 +13,34 @@ while (Number(sumPoints(detectPatterns(initialField))) !== 0){
 
 const GameField = () => {
     const [field, setField] = useState(initialField);
-    console.log("points", sumPoints(field), "field", field);
 
+    const handlePositionSwitch = (prevPosition, newPosition) => {
+        const switchTile = field.find(tile => tile.position === newPosition);
+        const currTile = field.find(tile => tile.position === prevPosition);
+
+        setField(prev => prev.map(tile => {
+            if (tile.position === prevPosition) return ({
+                position: tile.position,
+                value: switchTile.value,
+                pointValue: switchTile.pointValue
+            });
+            if (tile.position === newPosition) return ({
+                position: tile.position,
+                value: currTile.value,
+                pointValue: currTile.pointValue
+            });
+            return tile;
+        }));
+
+    }
+    
     return (<div className={styles.gameField}>
-            {field.map((tile, index) => <Tile 
+            {field.map(tile => <Tile 
             key={`tile${tile.position}`} 
             position={tile.position} 
             tileValue={tile.value} 
             tileState={tile.pointValue > 0 ? tileStates[2] : tileStates[0]}
-            onSwitch={setField}
+            onSwitch={handlePositionSwitch}
             />)}
         </div>);
 };
