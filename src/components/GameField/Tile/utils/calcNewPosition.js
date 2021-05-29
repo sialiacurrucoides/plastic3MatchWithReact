@@ -6,10 +6,10 @@ const calcNewPosition = (diffX, diffY, position) => {
         return position;
     }
     let newPosition;
-    if (Math.abs(diffX) > activateSwitch && activateSwitch > 0) newPosition = (position + 1);
-    if (Math.abs(diffX) > activateSwitch && activateSwitch < 0) newPosition = (position - 1);
-    if (Math.abs(diffY) > activateSwitch && activateSwitch > 0) newPosition = (position + nrOfColumns);
-    if (Math.abs(diffY) > activateSwitch && activateSwitch < 0) newPosition = (position - nrOfColumns);
+    if (Math.abs(diffX) > activateSwitch && diffX > 0) newPosition = (position - 1);
+    if (Math.abs(diffX) > activateSwitch && diffX < 0) newPosition = (position + 1);
+    if (Math.abs(diffY) > activateSwitch && diffY > 0) newPosition = (position - nrOfColumns);
+    if (Math.abs(diffY) > activateSwitch && diffY < 0) newPosition = (position + nrOfColumns);
 
     if (newPosition >= 0 && newPosition < nrElements) return newPosition;
     return position;
