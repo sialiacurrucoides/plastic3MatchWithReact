@@ -5,10 +5,11 @@ import { tileStates } from '../constants/constants';
 import {DraggableCore} from 'react-draggable';
 import calcNewPosition from './utils/calcNewPosition';
 
-const Tile = ({tileValue, position, tileState, onSwitch}) => {
+const Tile = ({tileValue, position, tileState, onSwitch, aboutToMove}) => {
 
     const [transformAmount, setTransformAmount] =useState(`translate(0px,0px)`);
     const [currentCoordinates, setCurrentCoordinates] = useState([null, null]);
+    const [tileKey, setTileKey] = useState(`${tileValue}`);
 
     const fromTop = calcTileFromTop(position);
     const fromLeft = calcTileFromLeft(position);
@@ -40,6 +41,9 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
 
     const classes = tileState === tileStates[2] ? `${styles.tile} ${styles.fading} ${styles.enterAnimation}`: `${styles.tile} ${styles.enterAnimation}`;
     
+    useEffect(() => {
+        setTileKey(prev => (`${prev}ch`))
+    }, [aboutToMove]);
     
     return (<DraggableCore
             nodeRef={nodeRef}
@@ -48,6 +52,7 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
             onStop={handleDragStop}
             >
             <div className={classes}
+                key={tileKey}
                 ref={nodeRef}
                 style={{top: fromTop, left: fromLeft, transform: transformAmount, backgroundImage: `url("imgs/icon_${tileValue + 1}.png")`}}
                 // onClick={handleTileClick}

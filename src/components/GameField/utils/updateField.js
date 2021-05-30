@@ -23,12 +23,14 @@ const provideUpperTileOrRandom = (position, inheritTilePosition, field) => {
     const upperValue = field.find(el => el.position === inheritTilePosition);
     if (upperValue) return ({
         ...upperValue,
-        position: position
+        position: position,
+        aboutToMove: upperValue.aboutToMove + 1
     });
     return ({
         position: position,
         value: Math.floor(Math.random()*7),
-        pointValue: 0
+        pointValue: 0,
+        aboutToMove: Math.random()
     });
 };
 

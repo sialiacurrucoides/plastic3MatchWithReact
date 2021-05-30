@@ -25,12 +25,14 @@ const GameField = () => {
             if (tile.position === prevPosition) return ({
                 position: tile.position,
                 value: switchTile.value,
-                pointValue: switchTile.pointValue
+                pointValue: switchTile.pointValue,
+                aboutToMove: tile.aboutToMove
             });
             if (tile.position === newPosition) return ({
                 position: tile.position,
                 value: currTile.value,
-                pointValue: currTile.pointValue
+                pointValue: currTile.pointValue,
+                aboutToMove: tile.aboutToMove
             });
             return tile;
         })));
@@ -41,7 +43,7 @@ const GameField = () => {
         setScore(sumPoints(field));
         setTimeout(() => {
             setField(prev => (detectPatterns(updateField(prev))));
-        }, 500);
+        }, 300);
         console.log("CHANGED");
     };
 
@@ -49,7 +51,7 @@ const GameField = () => {
         if (sumPoints(field) > 0) {
             setTimeout(() => {
                 setField(prev => (detectPatterns(updateField(prev))));
-            }, 500);
+            }, 300);
         }
     },[field]);
     
@@ -58,6 +60,7 @@ const GameField = () => {
             key={`tile${tile.position}`} 
             position={tile.position} 
             tileValue={tile.value} 
+            aboutToMove={tile.aboutToMove}
             tileState={tile.pointValue > 0 && recyclablePlastic.includes(tile.value) ? tileStates[2] : tileStates[0]}
             onSwitch={handlePositionSwitch}
             />)}

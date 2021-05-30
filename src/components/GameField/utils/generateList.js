@@ -12,5 +12,5 @@ export const generateList = (howMany = plasticNrPerType) => {
     }
     fieldElems = shuffle(fieldElems);
  
-    return fieldElems.map((el, index) => ({position:index, value: el, pointValue: 0}));
+    return fieldElems.map((el, index) => ({position:index, value: el, pointValue: 0, aboutToMove: 0}));
 };
