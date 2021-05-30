@@ -8,10 +8,26 @@
     border-radius: 25%;
     margin: 0;
     box-shadow: #444 3px 2px 2px;
-    opacity: 0.85;
     padding: 2px;
-    transition: scale 0.3s ease-in-out;
     cursor: pointer;
+}
+
+.enterAnimation {
+    animation: enter;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes enter {
+    0% {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 0.85;
+    }
 }
 
 .highlighted {
@@ -19,6 +35,18 @@
 	transform: scale(1.1);
 }
 
-.shrinked {
-    transform: scale(0.5);
+.fading {
+    animation: fade;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

@@ -6,8 +6,7 @@ import {DraggableCore} from 'react-draggable';
 import calcNewPosition from './utils/calcNewPosition';
 
 const Tile = ({tileValue, position, tileState, onSwitch}) => {
-    const [tileStyle, setTileStyle] = useState(tileState === tileStates[2] ? `${styles.tile} ${styles.shrinked}`: styles.tile);
-    const [highlighted, setHighlighted] = useState(false);
+
     const [transformAmount, setTransformAmount] =useState(`translate(0px,0px)`);
     const [currentCoordinates, setCurrentCoordinates] = useState([null, null]);
 
@@ -15,11 +14,6 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
     const fromLeft = calcTileFromLeft(position);
     
     const nodeRef = React.useRef(null);
-
-
-    const handleTileClick = () => {
-        setHighlighted(prev => !prev);
-    };
 
 
     const handleDragStart = (event) => {
@@ -44,25 +38,20 @@ const Tile = ({tileValue, position, tileState, onSwitch}) => {
         setTransformAmount(`translate(0px,0px)`);
     };
 
-    useEffect(() => {
-        if (highlighted) setTileStyle(`${styles.tile} ${styles.highlighted}`)
-        else setTileStyle(`${styles.tile}`);
-    }, [highlighted]);
-
-    useEffect(() => {
-
-    }, [position]);
-
+    const classes = tileState === tileStates[2] ? `${styles.tile} ${styles.fading} ${styles.enterAnimation}`: `${styles.tile} ${styles.enterAnimation}`;
+    
+    
     return (<DraggableCore
             nodeRef={nodeRef}
             onStart={handleDragStart}
             onDrag={handleDrag}
             onStop={handleDragStop}
             >
-            <div className={tileStyle}
+            <div className={classes}
                 ref={nodeRef}
                 style={{top: fromTop, left: fromLeft, transform: transformAmount, backgroundImage: `url("imgs/icon_${tileValue + 1}.png")`}}
-                onClick={handleTileClick}>
+                // onClick={handleTileClick}
+                >
             </div>
             </DraggableCore>
             );
