@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import styles from './GameField.module.scss';
 import { generateList } from './utils/generateList';
 import { updateField } from './utils/updateField';
@@ -8,6 +9,7 @@ import { tileStates, recyclablePlastic } from './constants/constants';
 import detectPatterns from './utils/detectPatterns';
 import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
+import ShowMessage from './ShowMessage/ShowMessage';
 
 let initialField = generateList();
 while (Number(sumPoints(detectPatterns(initialField))) !== 0){
@@ -17,6 +19,7 @@ while (Number(sumPoints(detectPatterns(initialField))) !== 0){
 const GameField = () => {
     const [field, setField] = useState(initialField);
     const dispatch = useDispatch();
+    const isGameOn = useSelector(state => state.general.isOn);
 
     const handlePositionSwitch = (prevPosition, newPosition) => {
         const switchTile = field.find(tile => tile.position === newPosition);
@@ -63,7 +66,8 @@ const GameField = () => {
 
     },[field, dispatch]);
     
-    return (<div className={styles.gameField} onMouseUp={handleChange}>
+    return (<div className={styles.gameField} >
+            {!isGameOn && <ShowMessage />}
             {field.map(tile => <Tile 
             key={`tile${tile.position}`} 
             position={tile.position} 
@@ -71,6 +75,7 @@ const GameField = () => {
             aboutToMove={tile.aboutToMove}
             tileState={tile.pointValue > 0 && recyclablePlastic.includes(tile.value) ? tileStates[2] : tileStates[0]}
             onSwitch={handlePositionSwitch}
+            onMouseUp={handleChange}
             />)}
         </div>);
 };
