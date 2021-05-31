@@ -4,4 +4,7 @@
     background-color: $primaryColor;
     width: 100%;
     min-height: $heatherHeight;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

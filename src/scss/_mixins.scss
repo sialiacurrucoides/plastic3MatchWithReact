@@ -1,0 +1,9 @@
+@mixin headerElement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $headerFontColor;
+    font-weight: 500;
+    line-height: 1.55;
+}
