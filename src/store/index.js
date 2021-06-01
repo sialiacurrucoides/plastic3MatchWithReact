@@ -37,7 +37,7 @@ const resultsSlice = createSlice({
     }
 });
 
-const initalBadgesState = {badges: []};
+const initalBadgesState = {badges: [], level: 0};
 
 const badgesSlice = createSlice({
     name: 'badges',
@@ -45,6 +45,13 @@ const badgesSlice = createSlice({
     reducers: {
         addBadge(state, action){
             state.badges.push(action.payload);
+        },
+        levelUp(state){
+            state.level += 1;
+        },
+        reset(state){
+            state.level = 0;
+            state.badges = [];
         }
     }
 

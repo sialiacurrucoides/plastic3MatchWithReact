@@ -1,0 +1,21 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+.container {
+    @include headerElement();
+}
+
+.badgeSeries {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 3rem;
+}
+
+.highlighted {
+    @include activated();
+    border-radius: 50%;
+    text-align: center;
+    width: 1rem;
+}

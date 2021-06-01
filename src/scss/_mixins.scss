@@ -14,3 +14,10 @@
     text-align: center;
     line-height: 1.6;
 }
+
+@mixin activated {
+    text-shadow: 0 0 1px rgb(238, 184, 103);
+	color: rgb(245, 232, 157);
+	box-shadow: 2px 2px 4px rgb(212, 201, 134);
+	position: relative;
+}

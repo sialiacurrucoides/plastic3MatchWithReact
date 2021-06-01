@@ -54,13 +54,9 @@
 }
 
 .activatedTech {
-    text-shadow: 0 0 1px rgb(238, 184, 103);
-	font-size: 140%;
-	color: rgb(233, 220, 148);
-	box-shadow: 2px 2px 4px rgb(202, 191, 127);
-	size: 120%;
-	position: relative;
-	animation: mymove 2s;
+    @include activated();
+    size: 120%;
+    font-size: 140%;
 }
 
 .stepsAnimation {
