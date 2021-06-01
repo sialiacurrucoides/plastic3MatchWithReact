@@ -1,8 +1,7 @@
-import { recyclablePlastic } from '../constants/constants';
 
-const sumPoints = (list) => {
+const sumPoints = (list,removablePlasticList) => {
     return list.reduce((acc, curr) => {
-        if (curr.pointValue > 0 && recyclablePlastic.includes(curr.value)) return acc + curr.pointValue;
+        if (curr.pointValue > 0 && removablePlasticList.includes(curr.value)) return acc + curr.pointValue;
         return acc;
     }, 0)
 };

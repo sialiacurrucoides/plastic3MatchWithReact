@@ -21,3 +21,18 @@
 	box-shadow: 2px 2px 4px rgb(212, 201, 134);
 	position: relative;
 }
+
+@mixin basicButton {
+    background-color: $primaryColor;
+    color: $headerFontColor;
+    margin: 0.75rem auto;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+
+
+    &:hover {
+        color: #444;
+        background-color: beige;
+        cursor: pointer;
+    }
+}

@@ -4,7 +4,7 @@ import GoButton from './Buttons/GoButton';
 import MessageCanvas from './MessageCanvas/MessageCanvas';
 import { useSelector, useDispatch } from 'react-redux';
 import { generalStateActions, resultsActions, badgesActions } from '../../store/index';
-import { canvasTypes, timeLimit } from '../../constants/constants';
+import { canvasTypes, timeLimit, nonrecyclablePlasticInx } from '../../constants/constants';
 
 const tips = [
     "7 stands for 'other types' of plastic",
@@ -98,7 +98,7 @@ export const StartGame = () => {
             <div className={styles.startGame}>
                 <p className={styles.textCenter}>You WIN if less than 10 remained from 3/6/7!</p>
                 <p>We, like Earth as we know it, are running ouf time...</p>
-                <p>You've got <strong id="timeLimit">{timeLimit}</strong> minutes!</p>
+                <p>You've got <strong id="timeLimit">{timeLimit}</strong> minutes to develop a new tech!</p>
                 <div className={styles.hourGlass}>
                     <i className="fa fa-hourglass-2"></i>                   
                 </div>
@@ -148,14 +148,29 @@ export const Congratualtion = () => {
 };
 
 export const PopUpTechSelection = () => {
+    const dispatch = useDispatch();
+
+    const handleSelection = (event) => {
+        const newTech = Number(event.target.dataset.id);
+       
+        dispatch(generalStateActions.addRemovablePlastic(newTech));
+        dispatch(badgesActions.addBadge(newTech + 1));
+        dispatch(generalStateActions.togglePause());
+    };
 
     return (
         <MessageCanvas>
             <div className={styles.popUpTech}>
-                <p class="text-center">Great work! Choose one type that you can handle from now on.</p><br />
-                <div class="btn btn-secondary m-3 tech-btn" id="create-3">Create Tech 3!</div>
-                <div class="btn btn-secondary m-3 tech-btn" id="create-6">Create Tech 6!</div>
-                <div class="btn btn-secondary m-3 tech-btn" id="create-7">Create Tech 7!</div>
+                <p >Great work! Choose one type that you can handle from now on.</p><br />
+                {nonrecyclablePlasticInx.map(plasticInx => 
+                    <div 
+                    className={styles.selectTechButton} 
+                    key={`select${plasticInx + 1}`} 
+                    onClick={handleSelection} 
+                    data-id={plasticInx}>
+                        {`Create Tech ${plasticInx + 1}`}
+                    </div>)}
+
             </div>
         </MessageCanvas>
     );

@@ -11,4 +11,5 @@ export const canvasTypes = {
 export const timeLimit = 1; // 4 minutes
 export const techScoreGoals = [20, 60, 100, 9999]; // [70, 170, 300, 9999];
 export const nonrecyclablePlasticInx = [2,5,6]; 
+export const recyclablePlasticInx = [0,1,3,4];
 export const badges = nonrecyclablePlasticInx.map(el => el + 1);

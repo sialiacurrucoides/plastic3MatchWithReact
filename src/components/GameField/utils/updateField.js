@@ -1,4 +1,4 @@
-import { recyclablePlastic, nrOfColumns } from '../constants/constants';
+import { nrOfColumns } from '../constants/constants';
 
 export const patternLengthsInColumn = (removeTiles) => {
     const diffs = removeTiles.map((pos, index) => removeTiles[index-1] ? pos - removeTiles[index-1] : nrOfColumns);
@@ -68,11 +68,11 @@ const calcNewField = (field, toRemoveByColumn, positionsToRemove) => {
 };
 
 
-export const updateField = (field) => {
+export const updateField = (field, removablePlasticList) => {
     const toRemoveByColumn = new Array(nrOfColumns);
 
     const positionsToRemove = field.reduce((acc, curr) => {
-        if (curr.pointValue > 0 && recyclablePlastic.includes(curr.value)) {
+        if (curr.pointValue > 0 && removablePlasticList.includes(curr.value)) {
             const findAlready = toRemoveByColumn[curr.position%nrOfColumns] ? toRemoveByColumn[curr.position%nrOfColumns] : [];
             toRemoveByColumn[curr.position%nrOfColumns] = [...findAlready, curr.position];
             return [...acc, curr.position];

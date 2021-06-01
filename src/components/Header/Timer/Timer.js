@@ -18,19 +18,25 @@ const Timer = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        
         if (isGameOn) {
             let prevTime = timeLimit*60*1000;
             const timer = setInterval(() => {
+                
                 if (prevTime === 0) {
-                    dispatch(generalStateActions.endGame());
-                    dispatch(generalStateActions.updateCanvas('gameOver'));
                     clearInterval(timer);
-                };
-                setRemainingTime(displayTime(prevTime));
-                prevTime -= step;
+                    dispatch(generalStateActions.stopGame());
+                    dispatch(generalStateActions.updateCanvas('gameOver'));
+                } else {
+                    setRemainingTime(displayTime(prevTime));
+                    prevTime -= step;
+                }
+                
             },step);
+        } else {
+            setRemainingTime(defaultDisplay);
+            
         }
-        else setRemainingTime(defaultDisplay);
     }, [isGameOn, dispatch]);
 
     return (

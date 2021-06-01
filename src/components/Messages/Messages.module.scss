@@ -1,3 +1,4 @@
+@import '../../scss/variables';
 @import '../../scss/mixins';
 
 .textCenter {
@@ -87,4 +88,9 @@
     padding: 0.75rem 0;
     text-align: center;
     margin: auto;
+}
+
+.selectTechButton {
+    @include basicButton();
+    width: 60%;
 }

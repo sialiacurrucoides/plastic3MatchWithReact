@@ -1,7 +1,12 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
-import { canvasTypes } from '../constants/constants';
+import { canvasTypes, recyclablePlasticInx } from '../constants/constants';
 
-const initialState = {isOn: false, canvasToShow: canvasTypes.intro1};
+const initialState = {
+    isOn: false, 
+    canvasToShow: canvasTypes.intro1,
+    removablePlasticList: recyclablePlasticInx,
+    isPaused: false
+};
 
 const generalStateSlice = createSlice({
     name: 'generalState',
@@ -10,11 +15,17 @@ const generalStateSlice = createSlice({
         startGame(state){
             state.isOn = true;
         },
-        endGame(state){
+        stopGame(state){
             state.isOn = false;
+        },
+        togglePause(state){
+            state.isPaused = !state.isPaused;
         },
         updateCanvas(state, action){
             state.canvasToShow = action.payload;
+        },
+        addRemovablePlastic(state, action){
+            state.removablePlasticList.push(action.payload);
         }
     }
 });

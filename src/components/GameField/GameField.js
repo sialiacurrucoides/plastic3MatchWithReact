@@ -5,25 +5,29 @@ import styles from './GameField.module.scss';
 import { generateList } from './utils/generateList';
 import { updateField } from './utils/updateField';
 import Tile from './Tile/Tile';
-import { tileStates, recyclablePlastic } from './constants/constants';
+import { tileStates } from './constants/constants';
 import detectPatterns from './utils/detectPatterns';
 import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
 
-const generateField = () => {
+const generateField = (removablePlasticList) => {
     let initialField = generateList();
-    while (Number(sumPoints(detectPatterns(initialField))) !== 0){
+    while (Number(sumPoints(detectPatterns(initialField), removablePlasticList)) !== 0){
         initialField = generateList();
     }
     return initialField;
 };
 
-
 const GameField = () => {
-    const [field, setField] = useState(generateField());
+    const removablePlasticList = useSelector(state => state.general.removablePlasticList);
+    const initialField = generateField(removablePlasticList);
+    const [field, setField] = useState(initialField);
     const dispatch = useDispatch();
     const isGameOn = useSelector(state => state.general.isOn);
+    const isPaused = useSelector(state => state.general.isPaused);
+
+
 
     const handlePositionSwitch = (prevPosition, newPosition) => {
         const switchTile = field.find(tile => tile.position === newPosition);
@@ -52,36 +56,36 @@ const GameField = () => {
     const handleChange = () => {
 
         setTimeout(() => {
-            setField(prev => (detectPatterns(updateField(prev))));
+            setField(prev => (detectPatterns(updateField(prev, removablePlasticList))));
         }, 300);
         console.log("CHANGED");
     };
 
     useEffect(() => {
 
-        const points = sumPoints(detectPatterns(field));
+        const points = sumPoints(detectPatterns(field), removablePlasticList);
         
         if (points > 0){
             dispatch(resultsActions.increaseScore(points));
             setTimeout(() => {
-                setField(prev => (detectPatterns(updateField(prev))));
+                setField(prev => (detectPatterns(updateField(prev, removablePlasticList))));
             }, 300);
         }
 
-    },[field, dispatch]);
+    },[field, dispatch, removablePlasticList]);
 
     useEffect(() => {
-        if (isGameOn) setField(generateField());
-    }, [isGameOn]);
+        if (isGameOn) setField(generateField(removablePlasticList));
+    }, [isGameOn, removablePlasticList]);
     
     return (<div className={styles.gameField} >
-            {!isGameOn && <ShowMessage />}
+            {(!isGameOn || isPaused) && <ShowMessage />}
             {field.map(tile => <Tile 
             key={`tile${tile.position}`} 
             position={tile.position} 
             tileValue={tile.value} 
             aboutToMove={tile.aboutToMove}
-            tileState={tile.pointValue > 0 && recyclablePlastic.includes(tile.value) ? tileStates[2] : tileStates[0]}
+            tileState={tile.pointValue > 0 && removablePlasticList.includes(tile.value) ? tileStates[2] : tileStates[0]}
             onSwitch={handlePositionSwitch}
             onMouseUp={handleChange}
             />)}
