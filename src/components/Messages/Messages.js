@@ -133,6 +133,13 @@ export const GameOver = () => {
 export const Congratualtion = () => {
 
     const score = useSelector(state => state.results.score);
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(badgesActions.reset());
+        dispatch(resultsActions.resetScore());
+        dispatch(generalStateActions.startGame());
+    };
 
     return (
         <MessageCanvas>
@@ -140,7 +147,7 @@ export const Congratualtion = () => {
                 <p className={styles.textCenter}>Amazing! You win. Keep this enthusiasm!</p><br />
                 <img src="imgs/gray-and-green-turtle.jpg" alt="turtle"></img>
                 <p className={styles.textCenter}>Your score: <span class="finalScore">{score}</span></p>
-                <AgainButton />
+                <AgainButton onClick={handleClick}/>
                 <p >Did you know? <span>{tips[Math.floor(Math.random() * tips.length)]}</span></p>
             </div>
         </MessageCanvas>
