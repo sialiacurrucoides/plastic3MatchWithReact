@@ -3,7 +3,7 @@ import AgainButton from './Buttons/AgainButton';
 import GoButton from './Buttons/GoButton';
 import MessageCanvas from './MessageCanvas/MessageCanvas';
 import { useSelector, useDispatch } from 'react-redux';
-import { generalStateActions } from '../../store/index';
+import { generalStateActions, resultsActions } from '../../store/index';
 import { canvasTypes, timeLimit } from '../../constants/constants';
 
 const tips = [
@@ -114,6 +114,7 @@ export const GameOver = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
+        dispatch(resultsActions.resetScore());
         dispatch(generalStateActions.startGame());
     };
 
