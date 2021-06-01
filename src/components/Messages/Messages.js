@@ -4,7 +4,7 @@ import GoButton from './Buttons/GoButton';
 import MessageCanvas from './MessageCanvas/MessageCanvas';
 import { useSelector, useDispatch } from 'react-redux';
 import { generalStateActions } from '../../store/index';
-import { canvasTypes } from '../../constants/constants';
+import { canvasTypes, timeLimit } from '../../constants/constants';
 
 const tips = [
     "7 stands for 'other types' of plastic",
@@ -98,7 +98,7 @@ export const StartGame = () => {
             <div className={styles.startGame}>
                 <p className={styles.textCenter}>You WIN if less than 10 remained from 3/6/7!</p>
                 <p>We, like Earth as we know it, are running ouf time...</p>
-                <p>You've got <strong id="timeLimit">4</strong> minutes!</p>
+                <p>You've got <strong id="timeLimit">{timeLimit}</strong> minutes!</p>
                 <div className={styles.hourGlass}>
                     <i className="fa fa-hourglass-2"></i>                   
                 </div>
@@ -111,13 +111,18 @@ export const StartGame = () => {
 export const GameOver = () => {
 
     const score = useSelector(state => state.results.score);
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(generalStateActions.startGame());
+    };
 
     return (
         <MessageCanvas>
             <div className={styles.gameOver}>
                 <p className={styles.textCenter} id="over">GAME OVER</p><br />
                 <p className={styles.textCenter}>Your score: <span>{score}</span></p>
-                <AgainButton />
+                <AgainButton onClick={handleClick}/>
             </div>
         </MessageCanvas>
     );

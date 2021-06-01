@@ -8,8 +8,10 @@
     border-radius: 4px;
     padding: 0.5rem 1rem;
 
+
     &:hover {
         color: #444;
         background-color: beige;
+        cursor: pointer;
     }
 }

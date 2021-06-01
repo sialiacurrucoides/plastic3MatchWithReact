@@ -7,3 +7,5 @@ export const canvasTypes = {
     selectTech: 'selectTech',
     congrat: 'congrat'
 };
+
+export const timeLimit = 1; // 4 minutes

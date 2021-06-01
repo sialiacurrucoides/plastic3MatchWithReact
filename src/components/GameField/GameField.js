@@ -11,13 +11,17 @@ import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
 
-let initialField = generateList();
-while (Number(sumPoints(detectPatterns(initialField))) !== 0){
-    initialField = generateList();
-}
+const generateField = () => {
+    let initialField = generateList();
+    while (Number(sumPoints(detectPatterns(initialField))) !== 0){
+        initialField = generateList();
+    }
+    return initialField;
+};
+
 
 const GameField = () => {
-    const [field, setField] = useState(initialField);
+    const [field, setField] = useState(generateField());
     const dispatch = useDispatch();
     const isGameOn = useSelector(state => state.general.isOn);
 
@@ -65,6 +69,10 @@ const GameField = () => {
         }
 
     },[field, dispatch]);
+
+    useEffect(() => {
+        if (isGameOn) setField(generateField());
+    }, [isGameOn]);
     
     return (<div className={styles.gameField} >
             {!isGameOn && <ShowMessage />}
