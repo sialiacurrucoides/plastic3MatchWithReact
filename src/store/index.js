@@ -5,7 +5,8 @@ const initialState = {
     isOn: false, 
     canvasToShow: canvasTypes.intro1,
     removablePlasticList: recyclablePlasticInx,
-    isPaused: false
+    isPaused: false,
+    highlightedPosition: null
 };
 
 const generalStateSlice = createSlice({
@@ -26,6 +27,9 @@ const generalStateSlice = createSlice({
         },
         addRemovablePlastic(state, action){
             state.removablePlasticList.push(action.payload);
+        },
+        setHighlightedPosition(state, action){
+            state.highlightedPosition = action.payload;
         }
     }
 });

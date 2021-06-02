@@ -10,6 +10,8 @@ import detectPatterns from './utils/detectPatterns';
 import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
+import checkIfNeighbour from './utils/checkIfNeighbour';
+import { generalStateActions } from '../../store/index';
 
 const generateField = (removablePlasticList) => {
     let initialField = generateList();
@@ -26,7 +28,7 @@ const GameField = () => {
     const dispatch = useDispatch();
     const isGameOn = useSelector(state => state.general.isOn);
     const isPaused = useSelector(state => state.general.isPaused);
-
+    const highlightedPosition = useSelector(state => state.general.highlightedPosition);
 
 
     const handlePositionSwitch = (prevPosition, newPosition) => {
@@ -58,7 +60,25 @@ const GameField = () => {
         setTimeout(() => {
             setField(prev => (detectPatterns(updateField(prev, removablePlasticList))));
         }, 300);
-        console.log("CHANGED");
+       
+    };
+
+    const handleTileClick = (event) => {
+        
+        const currPosition = Number(event.target.dataset.id);
+        if (currPosition > 0 && currPosition < 99){
+            if (highlightedPosition === null) {
+                dispatch(generalStateActions.setHighlightedPosition(currPosition));
+            } else {
+                if (!checkIfNeighbour(currPosition, highlightedPosition)) {
+                    dispatch(generalStateActions.setHighlightedPosition(currPosition));
+                }
+                else {
+                    handlePositionSwitch(currPosition, highlightedPosition);
+                }
+            };
+        }
+
     };
 
     useEffect(() => {
@@ -78,7 +98,7 @@ const GameField = () => {
         if (isGameOn) setField(generateField(removablePlasticList));
     }, [isGameOn, removablePlasticList]);
     
-    return (<div className={styles.gameField} >
+    return (<div className={styles.gameField} onClick={handleTileClick}>
             {(!isGameOn || isPaused) && <ShowMessage />}
             {field.map(tile => <Tile 
             key={`tile${tile.position}`} 

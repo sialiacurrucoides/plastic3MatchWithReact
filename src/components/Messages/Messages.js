@@ -52,7 +52,7 @@ export const Introduction2 = () => {
                         <img src="imgs/icon_2.png" alt="plastic-2" /><img src="imgs/icon_5.png" alt="plastic-5" /><img src="imgs/icon_3.png" alt="plastic-3" /><img src="imgs/icon_4.png" alt="plastic-4" />
                     </div>
                 </div>
-                <p>...by drag-and-drop </p>
+                <p>...by clicking on each or by dragging one </p>
                 <GoButton onClick={handleClick}/>
             </div>
         </MessageCanvas>
@@ -73,7 +73,7 @@ export const Introduction3 = () => {
                 <p>
                     you can <em>eliminate</em> one of the non-recyclable plastic types
                 </p>
-                <p className={styles.nonreSeries}>
+                <div className={styles.nonreSeries}>
                     <div className={styles.tile}>
                         <img src="imgs/icon_3.png" 
                         alt="plastic-3" />
@@ -86,7 +86,7 @@ export const Introduction3 = () => {
                         <img src="imgs/icon_7.png" 
                         alt="plastic-7" />
                     </div>
-                </p>
+                </div>
                 <br />
                 <p>by developing a new technology!</p>
                 <GoButton onClick={handleClick}/>
