@@ -4,7 +4,7 @@ import GoButton from './Buttons/GoButton';
 import MessageCanvas from './MessageCanvas/MessageCanvas';
 import { useSelector, useDispatch } from 'react-redux';
 import { generalStateActions, resultsActions, badgesActions } from '../../store/index';
-import { canvasTypes, timeLimit, nonrecyclablePlasticInx } from '../../constants/constants';
+import { canvasTypes, timeLimit, nonrecyclablePlasticInx, techScoreGoals } from '../../constants/constants';
 
 const tips = [
     "7 stands for 'other types' of plastic",
@@ -24,7 +24,7 @@ export const Introduction1 = () => {
         <MessageCanvas>
             <div className={styles.intro1}>
                 <h3 >Welcome to Plastic3match!</h3>
-                <p >A three-match game where you cannot make the non-recyclable plastic pieces disappear.</p><br />
+                <p >A three-match game where you can only make the recyclable plastics disappear.</p><br />
                 <p >Unless... You develop new technologies.</p>
                <GoButton onClick={handleClick}/>
             </div>
@@ -52,7 +52,7 @@ export const Introduction2 = () => {
                         <img src="imgs/icon_2.png" alt="plastic-2" /><img src="imgs/icon_5.png" alt="plastic-5" /><img src="imgs/icon_3.png" alt="plastic-3" /><img src="imgs/icon_4.png" alt="plastic-4" />
                     </div>
                 </div>
-                <p>...by clicking on each or by dragging one </p>
+                <p>...by drag-and-drop </p>
                 <GoButton onClick={handleClick}/>
             </div>
         </MessageCanvas>
@@ -68,18 +68,27 @@ export const Introduction3 = () => {
         <MessageCanvas>
             <div className={styles.intro3}>
                 <p>
-                    Aim for the next goal: <span className={styles.nextGoal}> 70</span>
+                    If you reach the next goal (score<span className={styles.nextGoal}>{techScoreGoals[0]}</span>)
                 </p>
                 <p>
-                    reaching the goal allows you to develop <em>new</em> technologies to deal with non-recyclable plastic types:
+                    you can <em>eliminate</em> one of the non-recyclable plastic types
                 </p>
-                <p>
-                    <span className={`${styles.tech} ${styles.activatedTech}`}>3</span>
-                    <span className={`${styles.tech} ${styles.activatedTech}`}>6</span>
-                    <span className={`${styles.tech} ${styles.activatedTech}`}>7</span>
+                <p className={styles.nonreSeries}>
+                    <div className={styles.tile}>
+                        <img src="imgs/icon_3.png" 
+                        alt="plastic-3" />
+                    </div> &nbsp; or &nbsp;
+                    <div className={styles.tile}>
+                        <img src="imgs/icon_6.png" 
+                        alt="plastic-6" />
+                    </div> &nbsp; or &nbsp;
+                    <div className={styles.tile}>
+                        <img src="imgs/icon_7.png" 
+                        alt="plastic-7" />
+                    </div>
                 </p>
                 <br />
-                <p>then you can <em>eliminate</em> the given number/plastic type!</p>
+                <p>by developing a new technology!</p>
                 <GoButton onClick={handleClick}/>
             </div>
         </MessageCanvas>
@@ -96,7 +105,7 @@ export const StartGame = () => {
     return (
         <MessageCanvas>
             <div className={styles.startGame}>
-                <p className={styles.textCenter}>You WIN if less than 10 remained from 3/6/7!</p>
+                <p className={styles.textCenter}>You WIN if you got all the badges: 3/6/7!</p>
                 <p>We, like Earth as we know it, are running ouf time...</p>
                 <p>You've got <strong id="timeLimit">{timeLimit}</strong> minutes to develop a new tech!</p>
                 <div className={styles.hourGlass}>

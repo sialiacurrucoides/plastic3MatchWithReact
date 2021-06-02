@@ -94,3 +94,10 @@
     @include basicButton();
     width: 60%;
 }
+
+.nonreSeries {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
