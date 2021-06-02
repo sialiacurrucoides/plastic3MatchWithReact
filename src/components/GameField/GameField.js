@@ -75,6 +75,7 @@ const GameField = () => {
                 }
                 else {
                     handlePositionSwitch(currPosition, highlightedPosition);
+                    dispatch(generalStateActions.setHighlightedPosition(null));
                 }
             };
         }
