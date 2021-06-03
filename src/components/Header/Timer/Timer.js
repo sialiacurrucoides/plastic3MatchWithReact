@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Timer.module.scss';
 import { timeLimit } from '../../../constants/constants';
@@ -16,9 +16,13 @@ const displayTime = (prevTime) => {
 const Timer = () => {
     const [remainingTime, setRemainingTime] = useState(defaultDisplay);
     const [isOver, setIsOver] = useState(false);
+
     const isGameOn = useSelector(state => state.general.isOn);
     const badges = useSelector(state => state.badges.badges);
+    const isPaused = useSelector(state => state.general.isPaused);
     const dispatch = useDispatch();
+    const interValID = useRef(0);
+    const displayedTime = useRef(timeLimit*60*1000);
 
     useEffect(() => {
         if (isOver){
@@ -30,34 +34,33 @@ const Timer = () => {
         }
     }, [isOver, badges, dispatch]);
 
-    useEffect(() => {
+    const updateTimer = useCallback(() => {
         
-        if (isGameOn) {
-            let prevTime = timeLimit*60*1000;
-            const timer = setInterval(() => {
-                
-                if (prevTime === 0) {
-                    clearInterval(timer);
-                    dispatch(generalStateActions.stopGame());
-                    setIsOver(true);
-                    // dispatch(generalStateActions.updateCanvas('gameOver'));
-                    // if (badges.length === nonrecyclablePlasticInx.length){
-                    //     dispatch(generalStateActions.updateCanvas('congrat'));
-                    // } else {
-                    //     dispatch(generalStateActions.updateCanvas('gameOver'));
-                    // }
-                    
-                } else {
-                    setRemainingTime(displayTime(prevTime));
-                    prevTime -= step;
-                }
-                
-            },step);
-        } else {
-            setRemainingTime(defaultDisplay);
+        interValID.current = setInterval(() => {
             
-        }
-    }, [isGameOn, dispatch]);
+            if (displayedTime.current === 0) {
+                clearInterval(interValID.current);
+                displayedTime.current = null;
+                dispatch(generalStateActions.stopGame());
+                setIsOver(true);              
+            } else {
+                setRemainingTime(displayTime(displayedTime.current));
+                displayedTime.current -= step;
+            }
+            
+        },step);
+        
+    }, [dispatch]); 
+
+
+    useEffect(() => {
+            if (isPaused && isGameOn) clearInterval(interValID.current);
+            else if (isGameOn && !isPaused) updateTimer();
+            else {
+                setRemainingTime(defaultDisplay);
+                displayedTime.current = timeLimit*60*1000;
+            };
+        },[isPaused, isGameOn, updateTimer]);
 
     return (
         <div className={styles.container}>
