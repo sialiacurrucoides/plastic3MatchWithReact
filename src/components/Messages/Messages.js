@@ -155,7 +155,7 @@ export const Congratualtion = () => {
             <div className={styles.congrat}>
                 <p className={styles.textCenter}>Amazing! You win. Keep this enthusiasm!</p><br />
                 <img src="imgs/gray-and-green-turtle.jpg" alt="turtle"></img>
-                <p className={styles.textCenter}>Your score: <span class="finalScore">{score}</span></p>
+                <p className={styles.textCenter}>Your score: <span className={styles.finalScore}>{score}</span></p>
                 <AgainButton onClick={handleClick}/>
                 <p >Did you know? <span>{tips[Math.floor(Math.random() * tips.length)]}</span></p>
             </div>
@@ -165,6 +165,7 @@ export const Congratualtion = () => {
 
 export const PopUpTechSelection = () => {
     const dispatch = useDispatch();
+    const badges = useSelector(state => state.badges.badges);
 
     const handleSelection = (event) => {
         const newTech = Number(event.target.dataset.id);
@@ -179,13 +180,14 @@ export const PopUpTechSelection = () => {
             <div className={styles.popUpTech}>
                 <p >Great work! Choose one type that you can handle from now on.</p><br />
                 {nonrecyclablePlasticInx.map(plasticInx => 
-                    <div 
+                    !badges.includes(plasticInx + 1) && <div 
                     className={styles.selectTechButton} 
                     key={`select${plasticInx + 1}`} 
                     onClick={handleSelection} 
                     data-id={plasticInx}>
                         {`Create Tech ${plasticInx + 1}`}
-                    </div>)}
+                    </div>
+                    )}
 
             </div>
         </MessageCanvas>
