@@ -3,5 +3,6 @@
 
 .againButton {
     @include basicButton();
-    width: 30%;
+    width: 33%;
+    font-family: Chewy, sans-serif;
 }
