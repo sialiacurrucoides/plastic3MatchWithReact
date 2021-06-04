@@ -14,3 +14,5 @@ export const techScoreGoals = [70, 170, 300, 999, 9999];
 export const timeLimit = 4 * 60 * 1000; // 4 minutes
 export const plastic_freqs = [1 / 7, 1 / 7, 1 / 7, 1 / 7, 1 / 7, 1 / 7, 1 / 7];
 export const tileStates = ['normal', 'highlighted', 'shrinking'];
+export const moveLimit = "40"; // px
+export const activateSwitch = "28"; 

@@ -1,5 +1,5 @@
 import { moveLimit, activateSwitch } from "../constants/constants";
-import { nrOfColumns, nrElements } from "../../constants/constants";
+import { nrOfColumns, nrElements } from "../constants/constants";
 
 const calcNewPosition = (diffX, diffY, position) => {
     if (Math.abs(diffX > moveLimit || diffY > moveLimit)){

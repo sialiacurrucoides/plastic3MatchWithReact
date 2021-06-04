@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './GameField.module.scss';
@@ -11,6 +11,7 @@ import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
 import checkIfNeighbour from './utils/checkIfNeighbour';
+import calcNewPosition from './utils/calcNewPosition';
 import { generalStateActions } from '../../store/index';
 
 const generateField = (removablePlasticList) => {
@@ -29,6 +30,8 @@ const GameField = () => {
     const isGameOn = useSelector(state => state.general.isOn);
     const isPaused = useSelector(state => state.general.isPaused);
     const highlightedPosition = useSelector(state => state.general.highlightedPosition);
+    const [currentCoordinates, setCurrentCoordinates] = useState([null, null]);
+    const startPosition = useRef(null);
 
 
     const handlePositionSwitch = (prevPosition, newPosition) => {
@@ -82,6 +85,42 @@ const GameField = () => {
 
     };
 
+    const handleDragStart = (event) => {
+        setCurrentCoordinates([event.pageX, event.pageY]);
+        startPosition.current = Number(event.target.dataset.id);
+    };
+
+    const handleDragStop = (event) => {
+        const diffX = currentCoordinates[0] - event.pageX;
+        const diffY = currentCoordinates[1] - event.pageY;
+        const position = startPosition.current;
+        const newPosition = calcNewPosition(diffX, diffY, position);
+        
+        if (newPosition !== position){
+            handlePositionSwitch(position, newPosition);
+        }
+    };
+
+    const validatePositions = (position, newPosition) => {
+        if (position && newPosition){
+            return Math.abs(position-newPosition) === 1 || Math.abs(position - newPosition) === 10;
+        }
+        return false;
+    }
+
+    const handleTouchStop = (event) => {
+        const currLocation = event.changedTouches[0];
+        const currTarget = document.elementFromPoint(currLocation.clientX, currLocation.clientY);
+        const newPosition = Number(currTarget.dataset.id);
+        const position = Number(event.target.dataset.id);
+        
+        if (validatePositions(position, newPosition))
+        {
+            handlePositionSwitch(position, newPosition);
+        }
+
+    };
+
     useEffect(() => {
 
         const points = sumPoints(detectPatterns(field), removablePlasticList);
@@ -98,8 +137,12 @@ const GameField = () => {
     useEffect(() => {
         if (isGameOn) setField(generateField(removablePlasticList));
     }, [isGameOn, removablePlasticList]);
+
     
-    return (<div className={styles.gameField} onClick={handleTileClick}>
+    return (<div className={styles.gameField} 
+            onTouchStart={handleDragStart}
+            onTouchEnd={handleTouchStop}
+            onClick={handleTileClick}>
             {(!isGameOn || isPaused) && <ShowMessage />}
             {field.map(tile => <Tile 
             key={`tile${tile.position}`} 
@@ -107,8 +150,10 @@ const GameField = () => {
             tileValue={tile.value} 
             aboutToMove={tile.aboutToMove}
             tileState={tile.pointValue > 0 && removablePlasticList.includes(tile.value) ? tileStates[2] : tileStates[0]}
-            onSwitch={handlePositionSwitch}
+            data-id={tile.position}
             onMouseUp={handleChange}
+            onStart={handleDragStart}
+            onStop={handleDragStop}
             />)}
         </div>);
 };

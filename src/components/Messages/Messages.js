@@ -16,7 +16,7 @@ const tips = [
 export const Introduction1 = () => {
     const dispatch = useDispatch();
 
-    const handleClick = () => {console.log("clicked");
+    const handleClick = () => {
         dispatch(generalStateActions.updateCanvas(canvasTypes.intro2));
     };
 
