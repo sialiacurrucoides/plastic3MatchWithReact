@@ -5,7 +5,7 @@ import styles from './GameField.module.scss';
 import { generateList } from './utils/generateList';
 import { updateField } from './utils/updateField';
 import Tile from './Tile/Tile';
-import { tileStates } from './constants/constants';
+import { nrOfColumns, tileStates } from './constants/constants';
 import detectPatterns from './utils/detectPatterns';
 import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
@@ -103,7 +103,7 @@ const GameField = () => {
 
     const validatePositions = (position, newPosition) => {
         if (position && newPosition){
-            return Math.abs(position-newPosition) === 1 || Math.abs(position - newPosition) === 10;
+            return Math.abs(position-newPosition) === 1 || Math.abs(position - newPosition) === nrOfColumns;
         }
         return false;
     }

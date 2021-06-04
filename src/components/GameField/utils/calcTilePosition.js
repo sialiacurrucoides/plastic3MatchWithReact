@@ -1,7 +1,7 @@
 import { nrOfColumns } from '../constants/constants';
 
-const tileRelativeWidth = 9.5;
-const marginWidth = (nrOfColumns - tileRelativeWidth)*nrOfColumns/2;
+const tileRelativeWidth = Math.floor(100/nrOfColumns) - 0.5; // 9.5;
+const marginWidth = (Math.floor(100/nrOfColumns) - tileRelativeWidth)*Math.floor(100/nrOfColumns)/2;
 
 export const calcTileFromTop = (index) => {
     const rowNr = Math.floor(index/nrOfColumns);
