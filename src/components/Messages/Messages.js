@@ -152,7 +152,7 @@ export const Congratualtion = () => {
     return (
         <MessageCanvas>
             <div className={styles.congrat}>
-                <p className={styles.textCenter}>Amazing! You win. Keep this enthusiasm!</p><br />
+                <p className={styles.textCenter}>Amazing! You won. Keep this enthusiasm!</p><br />
                 <img src="imgs/gray-and-green-turtle.jpg" alt="turtle"></img>
                 <p className={styles.textCenter}>Your score: <span className={styles.finalScore}>{score}</span></p>
                 <AgainButton onClick={handleClick}/>
