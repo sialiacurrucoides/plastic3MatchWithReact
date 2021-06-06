@@ -6,12 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { generalStateActions, resultsActions, badgesActions } from '../../store/index';
 import { canvasTypes, timeLimit, nonrecyclablePlasticInx, techScoreGoals } from '../../constants/constants';
 
-const tips = [
+/* const tips = [
     "7 stands for 'other types' of plastic",
     "Metalized films usually cannot be recycled even if the plastic type is PP.",
     "You can use reusable bags for buying fruits and vegetables.",
     "Buying from the local market is more eco-friendly."
-];
+]; */
 
 export const Introduction1 = () => {
     const dispatch = useDispatch();
