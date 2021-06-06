@@ -11,7 +11,6 @@ import sumPoints from './utils/sumPoints';
 import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
 import checkIfNeighbour from './utils/checkIfNeighbour';
-import calcNewPosition from './utils/calcNewPosition';
 import { generalStateActions } from '../../store/index';
 
 const generateField = (removablePlasticList) => {
@@ -30,7 +29,6 @@ const GameField = () => {
     const isGameOn = useSelector(state => state.general.isOn);
     const isPaused = useSelector(state => state.general.isPaused);
     const highlightedPosition = useSelector(state => state.general.highlightedPosition);
-    const [currentCoordinates, setCurrentCoordinates] = useState([null, null]);
     const startPosition = useRef(null);
 
 
@@ -69,7 +67,7 @@ const GameField = () => {
     const handleTileClick = (event) => {
         
         const currPosition = Number(event.target.dataset.id);
-        if (currPosition > 0 && currPosition < 99){
+        if (currPosition >= 0 && currPosition <= 99){
             if (highlightedPosition === null) {
                 dispatch(generalStateActions.setHighlightedPosition(currPosition));
             } else {
@@ -86,23 +84,20 @@ const GameField = () => {
     };
 
     const handleDragStart = (event) => {
-        setCurrentCoordinates([event.pageX, event.pageY]);
         startPosition.current = Number(event.target.dataset.id);
     };
 
     const handleDragStop = (event) => {
-        const diffX = currentCoordinates[0] - event.pageX;
-        const diffY = currentCoordinates[1] - event.pageY;
         const position = startPosition.current;
-        const newPosition = calcNewPosition(diffX, diffY, position);
+        const newPosition = Number(event.target.dataset.id);
         
-        if (newPosition !== position){
+        if (validatePositions(position, newPosition)){
             handlePositionSwitch(position, newPosition);
         }
     };
 
     const validatePositions = (position, newPosition) => {
-        if (position && newPosition){
+        if (position >= 0 && position <= 99 && newPosition >= 0 && newPosition <= 99){
             return Math.abs(position-newPosition) === 1 || Math.abs(position - newPosition) === nrOfColumns;
         }
         return false;

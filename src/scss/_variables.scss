@@ -2,7 +2,13 @@ $primaryColor: #aaac92; // #6F733F; // #c4c6a9;
 
 $heatherHeight: 4rem;
 $gameFieldHeight: 288px;
-$gameFieldMaxHeight: 400px;
+$gameFieldMaxHeight: 344px;
 
 $headerFontColor: #fff;
 $fontColor: #f1f1f1;
+
+$tileLength: 9%;
+
+:export {
+    tileWH: $tileLength;
+}

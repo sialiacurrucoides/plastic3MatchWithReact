@@ -1,7 +1,9 @@
+@import '../../../scss/variables';
+
 .tile {
     position: absolute;
-    width: 7%;
-    height: 7%;
+    width: $tileLength;
+    height: $tileLength;
     background-image: url('../../../assets/imgs/icon_1.png');
     background-size: cover;
     background-position: center;
@@ -10,6 +12,7 @@
     box-shadow: #444 3px 2px 2px;
     padding: 2px;
     cursor: pointer;
+    opacity: 0.85;
 }
 
 .enterAnimation {

@@ -1,5 +1,5 @@
-export const nrOfColumns = 10;
-export const nrOfRows = 10;
+export const nrOfColumns = 8;
+export const nrOfRows = 8;
 export const nrElements = nrOfColumns*nrOfRows;
 export const tips = [
     "7 stands for 'other types' of plastic",

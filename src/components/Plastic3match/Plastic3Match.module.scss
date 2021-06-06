@@ -2,7 +2,7 @@
 
 .gameBoard {
     min-width: 320px;
-    width: 400px;
+    width: $gameFieldMaxHeight;
     background: #fff;
     min-height: calc(#{$heatherHeight} + #{$gameFieldHeight});
     height: calc(#{$heatherHeight} + #{$gameFieldMaxHeight});

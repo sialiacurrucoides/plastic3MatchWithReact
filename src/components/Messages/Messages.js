@@ -24,8 +24,8 @@ export const Introduction1 = () => {
         <MessageCanvas>
             <div className={styles.intro1}>
                 <h3 >Welcome to Plastic3match!</h3>
-                <p >A three-match game where you can only make the recyclable plastics disappear.</p><br />
-                <p >Unless... You develop new technologies.</p>
+                <p >A three-match game where you can only make the recyclable plastics disappear.</p>
+                <p >Unless you develop a new tech.</p>
                <GoButton onClick={handleClick}/>
             </div>
         </MessageCanvas>
@@ -48,9 +48,9 @@ export const Introduction2 = () => {
                     <div className={styles.tile}>
                         <img src="imgs/icon_2.png" alt="plastic-2" /><img src="imgs/icon_1.png" alt="plastic-1" /><img src="imgs/icon_1.png" alt="plastic-1" /><img src="imgs/icon_1.png" alt="plastic-1" />
                     </div>
-                    <div className={styles.tile}>
+{/*                     <div className={styles.tile}>
                         <img src="imgs/icon_2.png" alt="plastic-2" /><img src="imgs/icon_5.png" alt="plastic-5" /><img src="imgs/icon_3.png" alt="plastic-3" /><img src="imgs/icon_4.png" alt="plastic-4" />
-                    </div>
+                    </div> */}
                 </div>
                 <p>...by clicking on each or by dragging one </p>
                 <GoButton onClick={handleClick}/>
@@ -87,7 +87,6 @@ export const Introduction3 = () => {
                         alt="plastic-7" />
                     </div>
                 </div>
-                <br />
                 <p>by developing a new technology!</p>
                 <GoButton onClick={handleClick}/>
             </div>
@@ -106,8 +105,8 @@ export const StartGame = () => {
         <MessageCanvas>
             <div className={styles.startGame}>
                 <p className={styles.textCenter}>You WIN if you got all the badges: 3/6/7!</p>
-                <p>We, like Earth as we know it, are running ouf time...</p>
-                <p>You've got <strong id="timeLimit">{timeLimit}</strong> minutes to develop a new tech!</p>
+                <p>Time is the essence...</p>
+                <p>You've got <strong id="timeLimit">{timeLimit}</strong> minute to develop a new tech!</p>
                 <div className={styles.hourGlass}>
                     <i className="fa fa-hourglass-2"></i>                   
                 </div>
