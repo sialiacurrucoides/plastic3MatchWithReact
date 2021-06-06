@@ -156,7 +156,7 @@ export const Congratualtion = () => {
                 <img src="imgs/gray-and-green-turtle.jpg" alt="turtle"></img>
                 <p className={styles.textCenter}>Your score: <span className={styles.finalScore}>{score}</span></p>
                 <AgainButton onClick={handleClick}/>
-                <p >Did you know? <span>{tips[Math.floor(Math.random() * tips.length)]}</span></p>
+                {/* <p >Did you know? <span>{tips[Math.floor(Math.random() * tips.length)]}</span></p> */}
             </div>
         </MessageCanvas>
     );
