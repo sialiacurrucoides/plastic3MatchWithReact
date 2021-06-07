@@ -18,6 +18,7 @@ const generalStateSlice = createSlice({
         },
         stopGame(state){
             state.isOn = false;
+            state.removablePlasticList = recyclablePlasticInx;
         },
         togglePause(state){
             state.isPaused = !state.isPaused;
