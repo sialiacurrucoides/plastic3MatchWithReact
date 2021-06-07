@@ -1,12 +1,27 @@
 @import '../../scss/variables';
 
+$controls: 2rem;
+
 .gameBoard {
     min-width: 320px;
     width: $gameFieldMaxHeight;
     background: #fff;
     min-height: calc(#{$heatherHeight} + #{$gameFieldHeight});
-    height: calc(#{$heatherHeight} + #{$gameFieldMaxHeight});
+    height: calc(#{$heatherHeight} + #{$gameFieldMaxHeight} + #{controls});
     z-index: 1;
     border-radius: 8px;
     overflow: hidden;
+}
+
+.soundControl {
+    height: $controls;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.25rem 1rem;
+}
+
+.speakerIcon {
+    cursor: pointer;
 }

@@ -12,6 +12,8 @@ import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
 import checkIfNeighbour from './utils/checkIfNeighbour';
 import { generalStateActions } from '../../store/index';
+import MatchSound from './SoundEffect/MatchSound';
+
 
 const generateField = (removablePlasticList) => {
     let initialField = generateList();
@@ -21,10 +23,11 @@ const generateField = (removablePlasticList) => {
     return initialField;
 };
 
-const GameField = () => {
+const GameField = ({soundAllowed}) => {
     const removablePlasticList = useSelector(state => state.general.removablePlasticList);
     const initialField = generateField(removablePlasticList);
     const [field, setField] = useState(initialField);
+    const [muted, setMuted] = useState(false);
     const dispatch = useDispatch();
     const isGameOn = useSelector(state => state.general.isOn);
     const isPaused = useSelector(state => state.general.isPaused);
@@ -122,7 +125,9 @@ const GameField = () => {
         
         if (points > 0){
             dispatch(resultsActions.increaseScore(points));
+            setMuted(false);
             setTimeout(() => {
+                setMuted(true);
                 setField(prev => (detectPatterns(updateField(prev, removablePlasticList))));
             }, 300);
         }
@@ -134,23 +139,29 @@ const GameField = () => {
     }, [isGameOn, removablePlasticList]);
 
     
-    return (<div className={styles.gameField} 
-            onTouchStart={handleDragStart}
-            onTouchEnd={handleTouchStop}
-            onClick={handleTileClick}>
-            {(!isGameOn || isPaused) && <ShowMessage />}
-            {field.map(tile => <Tile 
-            key={`tile${tile.position}`} 
-            position={tile.position} 
-            tileValue={tile.value} 
-            aboutToMove={tile.aboutToMove}
-            tileState={tile.pointValue > 0 && removablePlasticList.includes(tile.value) ? tileStates[2] : tileStates[0]}
-            data-id={tile.position}
-            onMouseUp={handleChange}
-            onStart={handleDragStart}
-            onStop={handleDragStop}
-            />)}
-        </div>);
+    return (
+        <>
+            {soundAllowed && !muted && <MatchSound isMuted={muted}/>}
+            <div className={styles.gameField} 
+                onTouchStart={handleDragStart}
+                onTouchEnd={handleTouchStop}
+                onClick={handleTileClick}>
+                {(!isGameOn || isPaused) && <ShowMessage />}
+                {field.map(tile => <Tile 
+                key={`tile${tile.position}`} 
+                position={tile.position} 
+                tileValue={tile.value} 
+                aboutToMove={tile.aboutToMove}
+                tileState={tile.pointValue > 0 && removablePlasticList.includes(tile.value) ? tileStates[2] : tileStates[0]}
+                data-id={tile.position}
+                onMouseUp={handleChange}
+                onStart={handleDragStart}
+                onStop={handleDragStop}
+                />)}
+            </div>
+            
+        </>
+        );
 };
 
 export default GameField;

@@ -1,6 +1,8 @@
 Plastic3match game with React
 The not recyclable plastic tiles cannot be matched until you reach a score to develop a new technology.
 
+Thanks for the speaker icon to: <a href="https://iconscout.com/icons/speaker-mute" target="_blank">Speaker Mute Icon</a> by <a href="https://iconscout.com/contributors/serpenttina" target="_blank">Nagarjan S</a>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
