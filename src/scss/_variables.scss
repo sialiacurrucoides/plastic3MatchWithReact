@@ -9,8 +9,10 @@ $fontColor: #f1f1f1;
 
 $tileLength: 9%;
 $tileContainerLength: 12%;
+$tileContainerLengthMobile: 16%;
 
 :export {
     tileWH: $tileLength;
     tileContainerWH: $tileContainerLength;
+    tileContainerLengthMobile: $tileContainerLengthMobile;
 }

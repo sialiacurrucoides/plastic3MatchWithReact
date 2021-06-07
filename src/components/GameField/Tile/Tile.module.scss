@@ -9,6 +9,13 @@
     align-items: center;
 }
 
+@media screen and (max-width: 600px){
+    .tileContainer {
+        width: $tileContainerLengthMobile;
+        height: $tileContainerLengthMobile;
+    }
+}
+
 .tile {
     width: 30px;
     height: 30px;

@@ -1,5 +1,5 @@
-export const nrOfColumns = 8;
-export const nrOfRows = 8;
+export const nrOfColumns = window.screen.width < 600 ? 6 : 8;
+export const nrOfRows = window.screen.width < 600 ? 6 : 8;
 export const nrElements = nrOfColumns*nrOfRows;
 export const tips = [
     "7 stands for 'other types' of plastic",
