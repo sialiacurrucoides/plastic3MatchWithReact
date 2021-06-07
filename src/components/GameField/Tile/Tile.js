@@ -37,27 +37,28 @@ const Tile = ({
 
     
     return (
-        <div
-        className={styles.tileContainer} 
-        key={tileKey}
-        ref={nodeRef}
-        data-id={position}
-        style={{top: fromTop, left: fromLeft}}
+        <DraggableCore
+        nodeRef={nodeRef}
+        onStart={onStart}
+        onStop={onStop}
         >
-            <DraggableCore
-            nodeRef={nodeRef}
-            onStart={onStart}
-            onStop={onStop}
+            <div
+            style={{top: fromTop, left: fromLeft}}
+            className={styles.tileContainer} 
+            key={tileKey}
+            ref={nodeRef}
+            data-id={position}
             >
-            <div className={classes}
-                key={tileKey}
-                ref={nodeRef}
-                data-id={position}
-                style={{backgroundImage: `url("imgs/icon_${tileValue + 1}.webp")`}}
-                >
+                <div className={classes}
+                    key={tileKey}
+                    ref={nodeRef}
+                    data-id={position}
+                    style={{backgroundImage: `url("imgs/icon_${tileValue + 1}.webp")`}}
+                    >
+                </div>
+                
             </div>
-            </DraggableCore>
-        </div>
+        </DraggableCore>
             );
 };
 
