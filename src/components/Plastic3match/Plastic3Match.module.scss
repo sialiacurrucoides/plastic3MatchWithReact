@@ -7,7 +7,7 @@ $controls: 2rem;
     width: $gameFieldMaxHeight;
     background: #fff;
     min-height: calc(#{$heatherHeight} + #{$gameFieldHeight});
-    height: calc(#{$heatherHeight} + #{$gameFieldMaxHeight} + #{controls});
+    height: calc(#{$heatherHeight} + #{$gameFieldMaxHeight} + #{$controls});
     z-index: 1;
     border-radius: 8px;
     overflow: hidden;
