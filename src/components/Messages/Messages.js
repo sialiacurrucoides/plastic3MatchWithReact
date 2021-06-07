@@ -5,13 +5,7 @@ import MessageCanvas from './MessageCanvas/MessageCanvas';
 import { useSelector, useDispatch } from 'react-redux';
 import { generalStateActions, resultsActions, badgesActions } from '../../store/index';
 import { canvasTypes, timeLimit, nonrecyclablePlasticInx, techScoreGoals } from '../../constants/constants';
-
-/* const tips = [
-    "7 stands for 'other types' of plastic",
-    "Metalized films usually cannot be recycled even if the plastic type is PP.",
-    "You can use reusable bags for buying fruits and vegetables.",
-    "Buying from the local market is more eco-friendly."
-]; */
+import {ReactComponent as Hourglass} from '../../assets/icons/hourglass.svg';
 
 export const Introduction1 = () => {
     const dispatch = useDispatch();
@@ -108,7 +102,7 @@ export const StartGame = () => {
                 <p>Time is the essence...</p>
                 <p>You've got <strong id="timeLimit">{timeLimit}</strong> minute to develop a new tech!</p>
                 <div className={styles.hourGlass}>
-                    <i className="fa fa-hourglass-2"></i>                   
+                    <Hourglass />                
                 </div>
                 <GoButton onClick={handleClick}/>
             </div>
@@ -152,11 +146,10 @@ export const Congratualtion = () => {
     return (
         <MessageCanvas>
             <div className={styles.congrat}>
-                <p className={styles.textCenter}>Amazing! You won. Keep this enthusiasm!</p><br />
-                <img src="imgs/gray-and-green-turtle.jpg" alt="turtle"></img>
+                <p className={styles.textCenter}>Amazing! You won. Keep this enthusiasm!</p>
                 <p className={styles.textCenter}>Your score: <span className={styles.finalScore}>{score}</span></p>
-                <AgainButton onClick={handleClick}/>
-                {/* <p >Did you know? <span>{tips[Math.floor(Math.random() * tips.length)]}</span></p> */}
+                <AgainButton onClick={handleClick}/><br />
+                <img src="imgs/gray-and-green-turtle.jpg" alt="turtle"></img>
             </div>
         </MessageCanvas>
     );

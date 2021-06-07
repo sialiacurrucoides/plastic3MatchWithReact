@@ -16,8 +16,12 @@
 
 .hourGlass {
     margin: auto;
+    margin-top: 0.5rem;
     text-align: center;
     font-size: 1.75rem;
+    width: 18px;
+    height: 28px;
+    transform-origin: center center;
     -webkit-animation: rotating 4s linear infinite;
     -moz-animation: rotating 4s linear infinite;
     -ms-animation: rotating 4s linear infinite;
