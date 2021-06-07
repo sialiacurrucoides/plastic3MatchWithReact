@@ -1,9 +1,17 @@
 @import '../../../scss/variables';
 
-.tile {
+.tileContainer {
     position: absolute;
-    width: $tileLength;
-    height: $tileLength;
+    width: $tileContainerLength;
+    height: $tileContainerLength;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tile {
+    width: 30px;
+    height: 30px;
     background-image: url('../../../assets/imgs/icon_1.png');
     background-size: cover;
     background-position: center;

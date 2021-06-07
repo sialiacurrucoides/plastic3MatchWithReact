@@ -36,7 +36,15 @@ const Tile = ({
     }, [aboutToMove]);
 
     
-    return (<DraggableCore
+    return (
+        <div
+        className={styles.tileContainer} 
+        key={tileKey}
+        ref={nodeRef}
+        data-id={position}
+        style={{top: fromTop, left: fromLeft}}
+        >
+            <DraggableCore
             nodeRef={nodeRef}
             onStart={onStart}
             onStop={onStop}
@@ -45,10 +53,11 @@ const Tile = ({
                 key={tileKey}
                 ref={nodeRef}
                 data-id={position}
-                style={{top: fromTop, left: fromLeft, backgroundImage: `url("imgs/icon_${tileValue + 1}.png")`}}
+                style={{backgroundImage: `url("imgs/icon_${tileValue + 1}.webp")`}}
                 >
             </div>
             </DraggableCore>
+        </div>
             );
 };
 

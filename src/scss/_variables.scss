@@ -1,4 +1,4 @@
-$primaryColor: #353430; // #aaac92; // #6F733F; // #c4c6a9;
+$primaryColor: #353430;
 
 $heatherHeight: 4rem;
 $gameFieldHeight: 288px;
@@ -8,7 +8,9 @@ $headerFontColor: #fff;
 $fontColor: #f1f1f1;
 
 $tileLength: 9%;
+$tileContainerLength: 12%;
 
 :export {
     tileWH: $tileLength;
+    tileContainerWH: $tileContainerLength;
 }
