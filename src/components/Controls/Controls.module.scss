@@ -1,0 +1,31 @@
+$controls: 2rem;
+
+.soundControl {
+    height: $controls;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.25rem 1rem;
+}
+
+.speakerIcon {
+    cursor: pointer;
+}
+
+.langCodes {
+    min-width: 5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 1rem;
+    padding: 0 0.5rem;
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    background: rgba(0,0,0,0.5);
+}
+
+.langCode {
+    cursor: pointer;
+}

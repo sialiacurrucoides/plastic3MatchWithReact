@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { defineMessages, FormattedMessage } from 'react-intl';
+
 import styles from './Timer.module.scss';
 import { timeLimit } from '../../../constants/constants';
 import { generalStateActions } from '../../../store/index';
@@ -12,6 +14,12 @@ const displayTime = (prevTime) => {
     const seconds = minutes > 0 ? (prevTime/1000) % (minutes*60): prevTime/1000;
     return `${minutes}:${seconds}`;
 }
+const messages = defineMessages({
+    time: {
+        id: 'header.time',
+        defaultMessage: 'Time'
+    }
+});
 
 const Timer = () => {
     const [remainingTime, setRemainingTime] = useState(defaultDisplay);
@@ -64,7 +72,7 @@ const Timer = () => {
 
     return (
         <div className={styles.container}>
-            <span>Time</span>
+            <span><FormattedMessage {...messages.time} /></span>
             <span>{remainingTime}</span>
         </div>
     );

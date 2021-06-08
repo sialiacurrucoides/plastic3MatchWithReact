@@ -1,12 +1,13 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
-import { canvasTypes, recyclablePlasticInx } from '../constants/constants';
+import { canvasTypes, recyclablePlasticInx, DEFAULT_LANG_639_1_CODE } from '../constants/constants';
 
 const initialState = {
     isOn: false, 
     canvasToShow: canvasTypes.intro1,
     removablePlasticList: recyclablePlasticInx,
     isPaused: false,
-    highlightedPosition: null
+    highlightedPosition: null,
+    language: DEFAULT_LANG_639_1_CODE,
 };
 
 const generalStateSlice = createSlice({
@@ -31,6 +32,9 @@ const generalStateSlice = createSlice({
         },
         setHighlightedPosition(state, action){
             state.highlightedPosition = action.payload;
+        },
+        changeLanguage(state, action){
+            state.language = action.payload;
         }
     }
 });

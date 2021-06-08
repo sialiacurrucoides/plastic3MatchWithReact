@@ -5,7 +5,7 @@
     text-align: center;
 }
 
-.startGame, .intro1, .intro2, .intro3 {
+.startGame, .intro1, .intro2, .intro3, .popUpTech {
     @include message();
 }
 
@@ -47,7 +47,7 @@
   }
 
 .nextGoal {
-    padding-left: 0.75rem;
+    padding-left: 0.25rem;
 }
 
 .tech {
@@ -96,6 +96,7 @@
 .selectTechButton {
     @include basicButton();
     width: 60%;
+    font-family: 'Sriracha', cursive;
 }
 
 .nonreSeries {

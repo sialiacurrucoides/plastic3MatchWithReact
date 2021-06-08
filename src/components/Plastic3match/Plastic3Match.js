@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import styles from './Plastic3Match.module.scss';
 import Header from '../Header/Header';
 import GameField from '../GameField/GameField';
-import {ReactComponent as SpeakerMuted} from '../../assets/icons/speaker_muted.svg';
-import {ReactComponent as Speaker} from '../../assets/icons/speaker.svg';
+import Controls from '../Controls/Controls';
+
 
 
 const Plastic3Match = () => {
@@ -17,9 +17,7 @@ const Plastic3Match = () => {
         <div className={styles.gameBoard}>
             <Header />
             <GameField soundAllowed={soundAllowed}/>
-            <div className={styles.soundControl} onClick={handleClick}>
-                <span className={styles.speakerIcon}>{soundAllowed ? <Speaker /> : <SpeakerMuted />}</span>
-            </div>
+            <Controls handleSpeakerClick={handleClick} soundAllowed={soundAllowed}/>
         </div>
     );
 

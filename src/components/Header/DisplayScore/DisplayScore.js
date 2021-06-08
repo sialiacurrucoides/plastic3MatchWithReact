@@ -1,8 +1,17 @@
 import React,  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { defineMessages, FormattedMessage } from 'react-intl';
+
 import styles from './DisplayScore.module.scss';
 import { resultsActions, badgesActions, generalStateActions } from '../../../store/index';
 import { techScoreGoals, canvasTypes } from '../../../constants/constants';
+
+const messages = defineMessages({
+    score: {
+        id: 'header.score',
+        defaultMessage: 'Score'
+    }
+});
 
 const DisplayScore = () => {
     const score = useSelector(state => state.results.score);
@@ -22,7 +31,7 @@ const DisplayScore = () => {
     }, [score, dispatch, record, level])
 
     return (<div className={styles.container}>
-                <span>Score</span>
+                <span><FormattedMessage {...messages.score} /></span>
                 <span>{score}</span>
             </div>);
 };
