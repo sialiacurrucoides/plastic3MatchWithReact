@@ -1,3 +1,4 @@
+import React,  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './DisplayScore.module.scss';
 import { resultsActions, badgesActions, generalStateActions } from '../../../store/index';
@@ -9,12 +10,16 @@ const DisplayScore = () => {
     const level = useSelector(state => state.badges.level);
     const dispatch = useDispatch();
 
-    if (score > record) dispatch(resultsActions.updateRecord(score));
-    if (score >= techScoreGoals[level]) {
-        dispatch(badgesActions.levelUp());
-        dispatch(generalStateActions.updateCanvas(canvasTypes.selectTech));
-        dispatch(generalStateActions.togglePause());
-    };
+
+    useEffect(() => {
+        if (score > record) dispatch(resultsActions.updateRecord(score));
+        if (score >= techScoreGoals[level]) {
+            dispatch(badgesActions.levelUp());
+            dispatch(generalStateActions.updateCanvas(canvasTypes.selectTech));
+            dispatch(generalStateActions.togglePause());
+        };
+
+    }, [score, dispatch, record, level])
 
     return (<div className={styles.container}>
                 <span>Score</span>
