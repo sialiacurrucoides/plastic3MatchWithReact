@@ -1,10 +1,10 @@
-import ReactAudioPlayer from 'react-audio-player';
+import CartoonSparkle from '../../../assets/sounds/cartoon-sparkle.wav';
 
-const MatchSound = ({isMuted}) => {
-    return <ReactAudioPlayer 
-    src="sounds/cartoon-sparkle.wav" 
-    autoPlay muted={isMuted}
-    volume={0.5}/>;
-};
+const SoundEffect = new Audio(CartoonSparkle);
+
+const MatchSound = () => {
+    SoundEffect.play();
+    return null;
+}
 
 export default MatchSound;

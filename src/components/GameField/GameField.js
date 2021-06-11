@@ -27,7 +27,7 @@ const GameField = ({soundAllowed}) => {
     const removablePlasticList = useSelector(state => state.general.removablePlasticList);
     const initialField = generateField(removablePlasticList);
     const [field, setField] = useState(initialField);
-    const [muted, setMuted] = useState(false);
+    const [playSound, setPlaySound] = useState(false);
     const dispatch = useDispatch();
     const isGameOn = useSelector(state => state.general.isOn);
     const isPaused = useSelector(state => state.general.isPaused);
@@ -125,9 +125,9 @@ const GameField = ({soundAllowed}) => {
         
         if (points > 0){
             dispatch(resultsActions.increaseScore(points));
-            setMuted(false);
+            setPlaySound(false);
             setTimeout(() => {
-                setMuted(true);
+                setPlaySound(true);
                 setField(prev => (detectPatterns(updateField(prev, removablePlasticList))));
             }, 300);
         }
@@ -141,7 +141,7 @@ const GameField = ({soundAllowed}) => {
     
     return (
         <>
-            {soundAllowed && !muted && <MatchSound isMuted={muted}/>}
+            {soundAllowed && playSound && <MatchSound />}
             <div className={styles.gameField} 
                 onTouchStart={handleDragStart}
                 onTouchEnd={handleTouchStop}
