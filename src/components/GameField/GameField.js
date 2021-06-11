@@ -125,9 +125,9 @@ const GameField = ({soundAllowed}) => {
         
         if (points > 0){
             dispatch(resultsActions.increaseScore(points));
-            setPlaySound(false);
+            setPlaySound(true);
             setTimeout(() => {
-                setPlaySound(true);
+                setPlaySound(false);
                 setField(prev => (detectPatterns(updateField(prev, removablePlasticList))));
             }, 300);
         }
