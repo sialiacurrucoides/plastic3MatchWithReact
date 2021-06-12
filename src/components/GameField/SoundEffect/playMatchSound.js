@@ -2,9 +2,8 @@ import CartoonSparkle from '../../../assets/sounds/cartoon-sparkle.wav';
 
 const SoundEffect = new Audio(CartoonSparkle);
 
-const MatchSound = () => {
+const playMatchSound = () => {
     SoundEffect.play();
-    return null;
 }
 
-export default MatchSound;
+export default playMatchSound;

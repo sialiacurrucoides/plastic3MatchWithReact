@@ -12,7 +12,7 @@ import { resultsActions } from '../../store/index';
 import ShowMessage from './ShowMessage/ShowMessage';
 import checkIfNeighbour from './utils/checkIfNeighbour';
 import { generalStateActions } from '../../store/index';
-import MatchSound from './SoundEffect/MatchSound';
+import playMatchSound from './SoundEffect/playMatchSound';
 
 
 const generateField = (removablePlasticList) => {
@@ -138,10 +138,13 @@ const GameField = ({soundAllowed}) => {
         if (isGameOn) setField(generateField(removablePlasticList));
     }, [isGameOn, removablePlasticList]);
 
+    useEffect(() => {
+        if (soundAllowed && playSound) playMatchSound();
+    }, [playSound, soundAllowed])
+
     
     return (
         <>
-            {soundAllowed && playSound && <MatchSound />}
             <div className={styles.gameField} 
                 onTouchStart={handleDragStart}
                 onTouchEnd={handleTouchStop}

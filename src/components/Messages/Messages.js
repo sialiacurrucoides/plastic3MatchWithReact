@@ -8,6 +8,7 @@ import MessageCanvas from './MessageCanvas/MessageCanvas';
 import { generalStateActions, resultsActions, badgesActions } from '../../store/index';
 import { canvasTypes, timeLimit, nonrecyclablePlasticInx, techScoreGoals } from '../../constants/constants';
 import {ReactComponent as Hourglass} from '../../assets/icons/hourglass.svg';
+import playMatchSound from '../GameField/SoundEffect/playMatchSound';
 
 const messages = defineMessages({
     intro1title: {
@@ -162,6 +163,7 @@ export const StartGame = () => {
     const dispatch = useDispatch();
 
     const handleClick = () => {
+        playMatchSound(); // ios requires user interactio to play sound, so trying to initiate
         dispatch(generalStateActions.startGame());
     }
 
